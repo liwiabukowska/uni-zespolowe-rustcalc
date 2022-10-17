@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: Swagger calculator - OpenAPI 3.0
+  description: calculator to have
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: 255946@student.pwr.edu.pl
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: 127.0.0.1:8080
+tags:
+  - name: calculation
+    description: request calculation on server
+paths:
+  /calc:
+    put:
+      tags:
+        - calculation
+      summary: Get result of calculation
+      description: Server calculates value and returns result
+      operationId: getCalc
+      requestBody:
+        description: Get calculated result of expression entered
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Calculation'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Calculation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Calculation'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationResult'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CalculationResult'
+        '400':
+          description: error
+components:
+  schemas:
+    Calculation:
+      required:
+        - expression
+      type: object
+      properties:
+        expression:
+          type: string
+          example: 2+3*7
+      xml:
+        name: Calculation
+    CalculationResult:
+      required:
+        - result
+      type: object
+      properties:
+        result:
+          type: string
+          example: 23
+      xml:
+        name: CalculationResult

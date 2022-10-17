@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: 255946@student.pwr.edu.pl
+  description: calculator to have
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger calculator - OpenAPI 3.0
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: 127.0.0.1:8080
+tags:
+- description: request calculation on server
+  name: calculation
+paths:
+  /calc:
+    put:
+      description: Server calculates value and returns result
+      operationId: getCalc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Calculation'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Calculation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Calculation'
+        description: Get calculated result of expression entered
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CalculationResult'
+          description: Successful operation
+        "400":
+          description: error
+      summary: Get result of calculation
+      tags:
+      - calculation
+components:
+  schemas:
+    Calculation:
+      example:
+        expression: 2+3*7
+      properties:
+        expression:
+          example: 2+3*7
+          type: string
+      required:
+      - expression
+      type: object
+      xml:
+        name: Calculation
+    CalculationResult:
+      example:
+        result: "23"
+      properties:
+        result:
+          example: "23"
+          type: string
+      required:
+      - result
+      type: object
+      xml:
+        name: CalculationResult
+
