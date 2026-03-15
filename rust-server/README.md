@@ -105,3 +105,5 @@ Method | HTTP request | Description
 
 ## Author
 Liwia Bukowska
+
+University project from 2022 to try out open api. Nothing to see here :D
